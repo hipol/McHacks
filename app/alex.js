@@ -11,6 +11,7 @@ var unfilteredArray = [];
 var filteredArray = [];
 var filled = false;
 var recording = false;
+var totalDuration = 0;
 
 function filterArray(unfilteredArray) {
   var filteredArray = [];
@@ -20,7 +21,8 @@ function filterArray(unfilteredArray) {
       duration += 50;
       i++;
     }
-    filteredArray.push([100, 0, unfilteredArray[i], 127, duration/4]);
+    filteredArray.push([totalDuration, 0, unfilteredArray[i], 127, duration/4]);
+    totalDuration += duration/4;
   }
   return(filteredArray);
 }
@@ -193,6 +195,7 @@ function interpret_correlation_result(event)
       createMIDI(filteredArray, 30000); /// included a random end clock... TODO fix please?
       console.log(unfilteredArray);
       console.log("hello");
+      totalDuration = 0;
     }
     filled = true;
     tempArray = [];
