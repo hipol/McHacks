@@ -126,7 +126,7 @@ function interpret_correlation_result(event)
   //console.log(dominant_frequency);
   if (confidence > confidence_threshold)
   {
-    summation += dominant_frequency.frequency;
+    summation = dominant_frequency.frequency;
     counter ++;
     //console.log(dominant_frequency.frequency);
     document.getElementById("noteDisplay").textContent = dominant_frequency.name;
@@ -136,12 +136,11 @@ function interpret_correlation_result(event)
   }
   else {
     counter++;
-    summation += dominant_frequency.frequency;
+    summation = dominant_frequency.frequency;
     //console.log(dominant_frequency.frequency)
   }
 
   if(counter==10) {
-      summation /= 10;
       counter = 0;
       averageMert = summation;
       //console.log(average + "    " + counter);
