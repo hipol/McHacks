@@ -16,13 +16,13 @@ var totalDuration = 0;
 function filterArray(unfilteredArray) {
   var filteredArray = [];
   for(var i = 0; i < unfilteredArray.length; i++) {
-    var duration = 50;
+    var duration = 5;
     while(unfilteredArray[i] == unfilteredArray[i+1]) {
-      duration += 50;
+      duration += 5;
       i++;
     }
-    filteredArray.push([totalDuration, 0, unfilteredArray[i], 127, duration/4]);
-    totalDuration += duration/4;
+    filteredArray.push([totalDuration, 0, unfilteredArray[i], 127, duration]);
+    totalDuration += duration;
   }
   return(filteredArray);
 }
@@ -129,7 +129,7 @@ function interpret_correlation_result(event)
     summation += dominant_frequency.frequency;
     counter ++;
     //console.log(dominant_frequency.frequency);
-    //document.getElementById("note-name").textContent = dominant_frequency.name;
+    document.getElementById("noteDisplay").textContent = dominant_frequency.name;
     //document.getElementById("frequency").textContent = dominant_frequency.frequency;
 
 
@@ -202,5 +202,5 @@ function interpret_correlation_result(event)
 
   }
   //console.log(finalArray);
-  document.getElementById("noteDisplay").textContent = noteDisplay;
+  //document.getElementById("noteDisplay").textContent = noteDisplay;
 }
