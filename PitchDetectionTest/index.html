@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html xmlns = "http://www.w3.org/1999/xhtml">
+<html>
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Vocal Garage Band</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/thumbnail-gallery.css" rel="stylesheet">
-
-
-
-
 <script src = "correlation_worker.js"></script>
 <script type="text/javascript">
 
@@ -152,7 +133,7 @@ function interpret_correlation_result(event)
 		//console.log(dominant_frequency.frequency);
 		//document.getElementById("note-name").textContent = dominant_frequency.name;
 		//document.getElementById("frequency").textContent = dominant_frequency.frequency;
-
+		
 
 	}
 	else {
@@ -202,7 +183,7 @@ function interpret_correlation_result(event)
 		}
 
 	}
-
+	
 	if(recording)	{
 		tempArray.push(noteDisplay);
 		console.log("ahh");
@@ -213,57 +194,17 @@ function interpret_correlation_result(event)
 			unfilteredArray = tempArray;
 			filteredArray = filterArray(unfilteredArray);
 			console.log(filteredArray);
-			createMIDI(filteredArray, 30000); /// included a random end clock... TODO fix please?
 			console.log(unfilteredArray);
 			console.log("hello");
 		}
 		filled = true;
 		tempArray = [];
-
+		
 	}
 	//console.log(finalArray);
 	document.getElementById("noteDisplay").textContent = noteDisplay;
 }
 </script>
-
-
-
-
-
-
-
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<!-- shim -->
-	<script src="/inc/shim/Base64.js" type="text/javascript"></script>
-	<script src="/inc/shim/Base64binary.js" type="text/javascript"></script>
-	<script src="/inc/shim/WebAudioAPI.js" type="text/javascript"></script>
-	<script src="/inc/shim/WebMIDIAPI.js" type="text/javascript"></script>
-	<!-- jasmid package -->
-	<script src="/inc/jasmid/stream.js"></script>
-	<script src="/inc/jasmid/midifile.js"></script>
-	<script src="/inc/jasmid/replayer.js"></script>
-	<!-- midi.js package -->
-	<script src="/js/midi/audioDetect.js" type="text/javascript"></script>
-	<script src="/js/midi/gm.js" type="text/javascript"></script>
-	<script src="/js/midi/loader.js" type="text/javascript"></script>
-	<script src="/js/midi/plugin.audiotag.js" type="text/javascript"></script>
-	<script src="/js/midi/plugin.webaudio.js" type="text/javascript"></script>
-	<script src="/js/midi/plugin.webmidi.js" type="text/javascript"></script>
-	<script src="/js/midi/player.js" type="text/javascript"></script>
-	<script src="/js/midi/synesthesia.js" type="text/javascript"></script>
-	<!-- utils -->
-	<script src="/js/util/dom_request_xhr.js" type="text/javascript"></script>
-	<script src="/js/util/dom_request_script.js" type="text/javascript"></script>
-	<!-- includes -->
-	<script src="examples/inc/timer.js" type="text/javascript"></script>
-	<script src="examples/inc/colorspace.js" type="text/javascript"></script>
-	<script src="examples/inc/event.js" type="text/javascript"></script>
-
-<!-- midi writer -->
-	<script src="js/JZZ.Midi.js"></script>
-	<script src="js/JZZ.MidiFile.js"></script>
-
-
 </head>
 
 <body>
@@ -276,154 +217,8 @@ function interpret_correlation_result(event)
 <hr>
 <button id="play-note">start/stop an E note</button>
 <form action="">
-<!--<input type="button" id="recorder" value="record" style="color:blue"
-       onclick="toggle(this);"> -->
+<input type="button" id="recorder" value="record" style="color:blue"
+       onclick="toggle(this);">
 </form>
-
-
-
-
-
-
-    <!-- Page Content -->
-    <div class="container">
-        <div class="col-lg-12">
-                <h1 class="page-header">Vocal Garage Band</h1>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <input type="button" id="playback" value="Playback :)" style="color:blue"
-       							onclick="playback();">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <input type="button" id="recorder" value="record" style="color:blue"
-       							onclick="toggle(this);">
-            </div>
-            <div class="col-md-6">
-                <a class="thumbnail" href="#">
-                    Name of File
-                </a>
-            </div>
-            <div class="col-md-4">
-                    <select id="ddlViewBy">
-                      <option value="1">Xylophone</option>
-                      <option value="2" selected="selected">Piano</option>
-                      <option value="3">Guitar</option>
-                      <option value="3">Voice</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <input type="button" id="recorder" value="record" style="color:blue"
-       							onclick="toggle(this);">
-            </div>
-            <div class="col-md-6">
-                <a class="thumbnail" href="#">
-                    Name of File
-                </a>
-            </div>
-            <div class="col-md-4">
-                    <select id="ddlViewBy">
-                      <option value="1">Xylophone</option>
-                      <option value="2" selected="selected">Piano</option>
-                      <option value="3">Guitar</option>
-                      <option value="3">Voice</option>
-                    </select>
-            </div>
-        </div>
-
-
-
-    </div>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- our app javascript -->
-    <script src="js/bundle.js"></script>
-
-
-
-
-
-
-
 </body>
-
-<script><!--
-
-// passes an array of notes:
-//Note: 1 --> clock: 100, MIDI channel: 0, note: F5, velocity: 127, duration: 100 clocks
-//Note: 2 --> clock: 200, MIDI channel: 0, note: E5, velocity: 127, duration: 50 clocks
-//End time = 300 clocks
-
-var uri = "";
-
-function createMIDI(notesArray, end) {
-
-	// Create a MIDI file. Type 1; 100 clocks per quarter note.
-	// Normally, it would rather be 96, but 100 makes it easier to count.
-	mf = new JZZ_.MidiFile(1,100);
-
-	var tr0 = new JZZ_.MidiFile.MTrk; mf.push(tr0);
-	tr0.addTempo(0,120); // Set to 120 BPM
-
-	// Add MIDI file tracks:
-	var tr2 = new JZZ_.MidiFile.MTrk; mf.push(tr2); // This one will be for the music
-
-	tr2.addName(0,'Music');
-	tr2.addMidi(0,0xc0,0x0b); // clock: 0, MIDI signal: 0xc0 0x0b (change channel 0 program to vibraphone)
-
-	//tr2.addNote(100,0,'F5',127,50); // clock: 100, MIDI channel: 0, note: E5, velocity: 127, duration: 50 clocks
-	var notesArrayLength = notesArray.length;
-	for (var i = 0; i < notesArrayLength; i++) {
-		console.log(notesArray[i]);
-    tr2.addNote(notesArray[i][0], notesArray[i][1], notesArray[i][2], notesArray[i][3], notesArray[i][4]);
-    //Do something
-	}
-
-	tr2.setTime(end); // otherwise it will end on clock 1690
-
-	var str = mf.dump(); // MIDI file dumped as a string
-	var b64 = JZZ_.MidiFile.toBase64(str); // convert to base-64 string
-	var uri = 'data:audio/midi;base64,' + b64; // data URI
-
-
-
-
-	MIDI.loadPlugin({
-	soundfontUrl: "examples/soundfont/",
-	instrument: "acoustic_grand_piano",
-	onprogress: function(state, progress) {
-		console.log(state, progress);
-	},
-	onsuccess: function() {
-
-
-		MIDI.Player.loadFile(uri, MIDI.Player.start); // load .MIDI from base64 or binary XML
-	}
-
-	});
-
-}
-
-
-
-
-
-
-
-
-</script>
-
-
 </html>
-
-
