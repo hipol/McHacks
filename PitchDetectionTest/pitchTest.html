@@ -19,13 +19,14 @@ var recording = false;
 function filterArray(unfilteredArray)	{
 	var filteredArray = [];
 	for(var i = 0; i < unfilteredArray.length; i++)	{
-		var duration = 0;
+		var duration = 50;
 		while(unfilteredArray[i] == unfilteredArray[i+1])	{
 			duration += 50;
 			i++;
 		}
-		filteredArray.push([100, 0, unfilteredArray[i], 127, duration]);
+		filteredArray.push([100, 0, unfilteredArray[i], 127, duration/4]);
 	}
+	return(filteredArray);
 }
 
 for (var i = 0; i < 30; i++)
@@ -71,7 +72,7 @@ function use_stream(stream)
 	script_processor.connect(audio_context.destination);
 	microphone.connect(script_processor);
 	var buffer = [];
-	var sample_length_milliseconds = 250;
+	var sample_length_milliseconds = 15.625;
 	var recording = true;
 	// Need to leak this function into the global namespace so it doesn't get
 	// prematurely garbage-collected.
@@ -96,7 +97,7 @@ function use_stream(stream)
 				}
 			);
 			buffer = [];
-			setTimeout(function() { recording = true; }, 1);
+			setTimeout(function() { recording = true; }, 15.625);
 		}
 	};
 	script_processor.onaudioprocess = window.capture_audio;
@@ -124,6 +125,7 @@ function interpret_correlation_result(event)
 	var confidence = maximum_magnitude / average;
 	var confidence_threshold = 10; // empirical, arbitrary.
 	var dominant_frequency = test_frequencies[maximum_index];
+	//console.log(dominant_frequency);
 	if (confidence > confidence_threshold)
 	{
 		summation += dominant_frequency.frequency;
@@ -192,6 +194,7 @@ function interpret_correlation_result(event)
 			unfilteredArray = tempArray;
 			filteredArray = filterArray(unfilteredArray);
 			console.log(filteredArray);
+			console.log(unfilteredArray);
 			console.log("hello");
 		}
 		filled = true;
