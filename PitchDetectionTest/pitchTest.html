@@ -1,7 +1,8 @@
 <html>
 <head>
 <script src = "correlation_worker.js"></script>
-<script>
+<script type="text/javascript">
+
 // Define the set of test frequencies that we'll use to analyze microphone data.
 var C4 = 261.626; // C2 note, in Hz.
 var notes = ["c4", "c#4", "d4", "d#4", "e4", "f4", "f#4", "g4", "g#4", "a4", "a#4", "b4"];
@@ -9,6 +10,24 @@ var test_frequencies = [];
 var summation = 0;
 var counter = 0;
 var averageMert = 0;
+var tempArray = [];
+var unfilteredArray = [];
+var filteredArray = [];
+var filled = false;
+var recording = false;
+
+function filterArray(unfilteredArray)	{
+	var filteredArray = [];
+	for(var i = 0; i < unfilteredArray.length; i++)	{
+		var duration = 0;
+		while(unfilteredArray[i] == unfilteredArray[i+1])	{
+			duration += 50;
+			i++;
+		}
+		filteredArray.push([100, 0, unfilteredArray[i], 127, duration]);
+	}
+}
+
 for (var i = 0; i < 30; i++)
 {
 	var note_frequency = C4 * Math.pow(2, i / 12);
@@ -21,6 +40,21 @@ for (var i = 0; i < 30; i++)
 window.addEventListener("load", initialize);
 var correlation_worker = new Worker(URL.createObjectURL(new Blob(["("+worker_function.toString()+")()"], {type: 'text/javascript'})));
 correlation_worker.addEventListener("message", interpret_correlation_result);
+
+
+function toggle(button)
+{
+  if(document.getElementById("recorder").value=="record"){
+   document.getElementById("recorder").value="stop recording";
+   recording = true;
+}
+
+  else if(document.getElementById("recorder").value=="stop recording"){
+   document.getElementById("recorder").value="record";
+   recording = false;
+}
+}
+
 function initialize()
 {
 	var get_user_media = navigator.getUserMedia;
@@ -37,7 +71,7 @@ function use_stream(stream)
 	script_processor.connect(audio_context.destination);
 	microphone.connect(script_processor);
 	var buffer = [];
-	var sample_length_milliseconds = 1;
+	var sample_length_milliseconds = 250;
 	var recording = true;
 	// Need to leak this function into the global namespace so it doesn't get
 	// prematurely garbage-collected.
@@ -94,7 +128,7 @@ function interpret_correlation_result(event)
 	{
 		summation += dominant_frequency.frequency;
 		counter ++;
-		console.log(dominant_frequency.frequency);
+		//console.log(dominant_frequency.frequency);
 		//document.getElementById("note-name").textContent = dominant_frequency.name;
 		//document.getElementById("frequency").textContent = dominant_frequency.frequency;
 		
@@ -103,7 +137,7 @@ function interpret_correlation_result(event)
 	else {
 		counter++;
 		summation += dominant_frequency.frequency;
-		console.log(dominant_frequency.frequency)
+		//console.log(dominant_frequency.frequency)
 	}
 
 	if(counter==10)	{
@@ -114,7 +148,7 @@ function interpret_correlation_result(event)
 		}
 
 	document.getElementById("average").textContent = averageMert;
-	console.log(averageMert);
+	//console.log(averageMert);
 	var noteArray = ["C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4"];
 	var frequencyArray = [];
 	for (var i = 0; i < 30; i++)
@@ -147,6 +181,24 @@ function interpret_correlation_result(event)
 		}
 
 	}
+	
+	if(recording)	{
+		tempArray.push(noteDisplay);
+		console.log("ahh");
+		filled = false;
+	}
+	else {
+		if(!filled)	{
+			unfilteredArray = tempArray;
+			filteredArray = filterArray(unfilteredArray);
+			console.log(filteredArray);
+			console.log("hello");
+		}
+		filled = true;
+		tempArray = [];
+		
+	}
+	//console.log(finalArray);
 	document.getElementById("noteDisplay").textContent = noteDisplay;
 }
 </script>
@@ -161,5 +213,9 @@ function interpret_correlation_result(event)
 </p>
 <hr>
 <button id="play-note">start/stop an E note</button>
+<form action="">
+<input type="button" id="recorder" value="record" style="color:blue"
+       onclick="toggle(this);">
+</form>
 </body>
 </html>
