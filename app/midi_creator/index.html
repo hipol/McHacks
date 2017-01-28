@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Write MIDI File</title>
+<script src="js/JZZ.Midi.js"></script>
+<script src="js/JZZ.MidiFile.js"></script>
+<style type="text/css">
+embed {
+ width:12em;
+ height:1em;
+ margin-left:2em;
+}
+</style>
+</head>
+
+<body>
+<h1>Write MIDI File</h1>
+
+<div id="out"></div>
+
+<script><!--
+// Create a MIDI file. Type 1; 100 clocks per quarter note.
+// Normally, it would rather be 96, but 100 makes it easier to count.
+mf = new JZZ_.MidiFile(1,100);
+
+// Add MIDI file tracks:
+var tr2 = new JZZ_.MidiFile.MTrk; mf.push(tr2); // This one will be for the music
+
+tr2.addName(0,'Music');
+tr2.addMidi(0,0xc0,0x0b); // clock: 0, MIDI signal: 0xc0 0x0b (change channel 0 program to vibraphone)
+tr2.addNote(100,0,'E5',127,50); // clock: 100, MIDI channel: 0, note: E5, velocity: 127, duration: 50 clocks
+tr2.addNote(150,0,'D5',127,50); // etc...
+tr2.addNote(200,0,'C5',127,50);
+tr2.addNote(250,0,'D5',127,50);
+tr2.addNote(300,0,'E5',127,50);
+tr2.addNote(350,0,64,127,50);   // can also use numerical values for the notes
+tr2.addNote(400,0,0x40,127,90);
+tr2.addNote(500,0,'D5',127,50);
+tr2.addNote(550,0,'D5',127,50);
+tr2.addNote(600,0,'D5',127,90);
+tr2.addNote(700,0,'E5',127,50);
+tr2.addNote(750,0,'G5',127,50);
+tr2.addNote(800,0,'G5',127,90);
+
+tr2.addNote(900,0,'E5',127,50);
+tr2.addNote(950,0,'D5',127,50);
+tr2.addNote(1000,0,'C5',127,50);
+tr2.addNote(1050,0,'D5',127,50);
+tr2.addNote(1100,0,'E5',127,50);
+tr2.addNote(1150,0,'E5',127,50);
+tr2.addNote(1200,0,'E5',127,90);
+tr2.addNote(1300,0,'D5',127,50);
+tr2.addNote(1350,0,'D5',127,50);
+tr2.addNote(1400,0,'E5',127,50);
+tr2.addNote(1450,0,'D5',127,50);
+tr2.addNote(1500,0,'C5',127,190);
+tr2.addNote(1600,0,'E5',100,90);
+tr2.addNote(1600,0,'G5',100,90);
+tr2.addNote(1600,0,'C6',127,90);
+tr2.setTime(1700); // otherwise it will end on clock 1690
+
+var str = mf.dump(); // MIDI file dumped as a string
+var b64 = JZZ_.MidiFile.toBase64(str); // convert to base-64 string
+var uri = 'data:audio/midi;base64,' + b64; // data URI
+
+// Finally, write it to the document as a link and as an embedded object:
+document.getElementById('out').innerHTML='New file: <a href=' + uri + '>DOWNLOAD</a> <embed src=' + uri + ' autostart=false>';
+--></script>
+
+</body>
+</html>
