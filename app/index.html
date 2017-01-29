@@ -90,16 +90,30 @@
 
 
 
-
+<h2>Time Left: <span id="timeLeft"></span></h2>
     <!-- Page Content -->
     <div class="container">
         <div class="col-lg-12">
-                <h1 class="page-header">Vocal Garage Band</h1>
+                <h1 class="page-header text-center">Vocal Garage Band</h1>
         </div>
-        <div class="row col-lg-12">
-          <div class="text-center" id="controls">
-                  <input class="myButton col-md-2 btn-lg btn-warning text-center" type="button" id="playback" value="Playback" onclick="playback();">
-                  <input class="myButton col-md-2 btn-lg btn-warning text-center" type="button" id="recorder" value="Record" onclick="toggle(this);">
+
+        <div class="row text-center">
+          <div class="row text-center" id="controls">
+            <div class = "col-md-12 text-center" id="controll">
+              <div class="col-md-4">
+
+              </div>
+              <div class="col-md-2">
+                  <input class="myButton btn-lg text-center" type="button" id="playback" value="Playback" onclick="playback();">
+              </div>
+              <div class="col-md-2">
+                  <input class="myButton btn-lg text-center" type="button" id="recorder" value="Record" onclick="toggle(this);">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+                <h3 class="page-header text-center">Welcome to Vocal Garage Band!</h3>
+                <h3 class="page-header text-center">Start by hitting "Record" and singing a tune into your microphone!</h3>
           </div>
         </div>
 
@@ -138,8 +152,8 @@ var dom_counter = 0
 function addDom(){
       dom_counter = dom_counter + 1;
 
-      var domElement = $('<div class="row files text-center" id="row' + dom_counter + '"><div class="col-md-1"><input type="button" id="deleter' + dom_counter + '" value="delete" onclick="deleteMIDI(' + dom_counter + ');"></div><div class="col-md-1"><input type="button" id="play' + dom_counter + '" value="play" onclick="individualPlayback(' + dom_counter + ');"></div><div class="col-md-3">Track_number_' + dom_counter + '</div><div class="col-md-1"><select id="instrument' + dom_counter + '"><option value="accordion">Accordion</option><option value="flute" selected="selected">Flute</option><option value="cello">Cello</option><option value="clarinet">Clarinet</option></select></div></div>');
-      $("div[id='controls").after(domElement);
+      var domElement = $('<div class="row files text-center" id="row' + dom_counter + '"><div class="col-md-1"><input type="myBButton" id="deleter' + dom_counter + '" value="delete" onclick="deleteMIDI(' + dom_counter + ');"></div><div class="col-md-1"><input type="myBButton" id="play' + dom_counter + '" value="play" onclick="individualPlayback(' + dom_counter + ');"></div><div class="col-md-3">Track_number_' + dom_counter + '</div><div class="col-md-1"><select id="instrument' + dom_counter + '"><option value="accordion">Accordion</option><option value="flute" selected="selected">Flute</option><option value="cello">Cello</option><option value="acoustic_grand_piano">Piano</option><option value="breath_noise">Breath Noise</option><option value="church_organ">Church Organ</option><option value="electric_bass_pick">Bass Guitar</option><option value="clarinet">Clarinet</option></select></div></div>');
+      $("div[id='controls']").after(domElement);
 }
 
 

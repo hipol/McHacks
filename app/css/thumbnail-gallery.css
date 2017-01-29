@@ -13,29 +13,70 @@ background: -o-linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(133,201,222,1
 background: -ms-linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(133,201,222,1) 50%, rgba(188,224,238,1) 100%);
 background: linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(133,201,222,1) 50%, rgba(188,224,238,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=1 );
-    color: white;
     min-height: 100vh;
 }
 
-.files{
-  margin-top:60px;
-  margin-bottom:60px;
-  padding: 20px;
-  background-color: rgba(0,0,0,0.7);
-  font-size: 20px;
+.container{
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
 }
 
-input{
-  color: black !important;
-  background-color: red !important;
-  border-color: grey !important;
+.container div{
+  margin: 0;
+  padding: 0;
 }
+
+h1{
+  color: white;
+  border: 0px none !important;
+  background-color: rgba(0,0,0,0.7);
+  min-width: 100vw;
+  padding-top: 80px;
+  padding-bottom: 40px !important;
+  margin: 0;
+}
+
+.files{
+  margin-top:30px !important;
+  margin-bottom:30px !important;
+  padding: 20px !important;
+  background-color: rgba(0,0,0,0.7) !important;
+  font-size: 20px !important;
+}
+
+.myBButton {
+  -moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+  -webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+  box-shadow:inset 0px 39px 0px -24px #e67a73;
+  background-color:#e4685d;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  border-radius:4px;
+  border:1px solid #ffffff;
+  display:inline-block;
+  cursor:pointer;
+  color: black !important;
+  font-family:Arial;
+  font-size:15px;
+  padding:6px 15px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #b23e35;
+}
+.myBButton:hover {
+  background-color:#eb675e;
+}
+.myBButton:active {
+  position:relative;
+  top:1px;
+}
+
 
 #controls input{
   color: black !important;
   border-radius: 20px;
   font-size: 20px;
-  padding-bottom: 20px;
+
 
 
 }
@@ -51,7 +92,7 @@ input{
   color:#ffffff;
   font-family:Arial;
   font-size:17px;
-  padding:16px 31px;
+  padding:16px 20px;
   text-decoration:none;
   text-shadow:0px 1px 0px #2f6627;
 }
@@ -65,8 +106,13 @@ input{
 
 
 
+.control-panel{
+  margin: 40px;
+}
 
-
+#controll{
+  margin: 0;
+}
 
 
 
