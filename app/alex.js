@@ -21,7 +21,7 @@ function filterArray(unfilteredArray) {
       duration += 3;
       i++;
     }
-    filteredArray.push([totalDuration, 0, unfilteredArray[i], 127, duration]);
+    filteredArray.push([totalDuration/100, 0, unfilteredArray[i], 127, duration/100]);
     totalDuration += duration;
   }
   return(filteredArray);
@@ -46,6 +46,7 @@ function toggle(button)
   if(document.getElementById("recorder").value=="record"){
    document.getElementById("recorder").value="stop recording";
    recording = true;
+   playback();
 }
 
   else if(document.getElementById("recorder").value=="stop recording"){
@@ -148,7 +149,8 @@ function interpret_correlation_result(event)
 
   document.getElementById("average").textContent = averageMert;
   //console.log(averageMert);
-  var noteArray = ["C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4"];
+  //var noteArray = ["C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4"];
+  var noteArray = [48,49,50,51,52,53,54,55,56,57,58,59];
   var frequencyArray = [];
   for (var i = 0; i < 30; i++)
   {
