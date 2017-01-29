@@ -6,7 +6,6 @@ oggenc
 oggdec
 
 # NODE/NPM
-node_modules*
 npm-debug.log
 
 # FORMATS
