@@ -44,13 +44,18 @@ correlation_worker.addEventListener("message", interpret_correlation_result);
 function toggle(button)
 {
   if(document.getElementById("recorder").value=="Record"){
-   document.getElementById("recorder").value="Stop Recording";
+    document.getElementById("recorder").style="background-color: red; border:3px solid black;";
+    document.getElementById("recorder").value="3";
+    setTimeout('document.getElementById("recorder").value="2";', 1000);
+    setTimeout('document.getElementById("recorder").value="1";', 2000);
+    setTimeout('document.getElementById("recorder").value="Stop Recording";', 3000);
    recording = true;
    playback();
 }
 
   else if(document.getElementById("recorder").value=="Stop Recording"){
    document.getElementById("recorder").value="Record";
+   document.getElementById("recorder").style="background-color: #44c767";
    recording = false;
 
    addDom();
