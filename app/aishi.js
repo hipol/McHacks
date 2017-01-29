@@ -1,7 +1,6 @@
 
 
 
-
 // passes an array of notes:
 //Note: 1 --> clock: 100, MIDI channel: 0, note: F5, velocity: 127, duration: 100 clocks
 //Note: 2 --> clock: 200, MIDI channel: 0, note: E5, velocity: 127, duration: 50 clocks
@@ -203,4 +202,5 @@ function playback(num){
   });
 }
 */
+
 
