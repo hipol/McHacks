@@ -77,18 +77,16 @@ correlation_worker.addEventListener("message", interpret_correlation_result);
 
 function toggle(button)
 {
+
+     
+
+    console.log('asldkf');
+    //gain_node.gain.value = 0.1;
   if(document.getElementById("recorder").value=="Record"){
-    document.getElementById("recorder").style="background-color: red; border:3px solid black;";
-    document.getElementById("recorder").value="3";
-    setTimeout('document.getElementById("recorder").value="2";', 1000);
-    setTimeout('document.getElementById("recorder").value="1";', 2000);
-    setTimeout('document.getElementById("recorder").value="Stop Recording";', 3000);
-   recording = true;
-   console.log("i got here");
-   var note_context = new AudioContext();
+    var note_context = new AudioContext();
 var note_node = note_context.createOscillator();
 var gain_node = note_context.createGain();
-note_node.frequency = C2 * Math.pow(2, 4 / 12); // E, ~82.41 Hz.
+note_node.frequency = C4 * Math.pow(2, 4 / 12); // E, ~82.41 Hz.
 gain_node.gain.value = 0;
 note_node.connect(gain_node);
 gain_node.connect(note_context.destination);
@@ -98,6 +96,25 @@ var playing = false;
   playing = !playing;
     console.log('asldkf');
     gain_node.gain.value = 0.1;
+    document.getElementById("recorder").style="background-color: red; border:3px solid black;";
+    document.getElementById("recorder").value="3";
+    //gain_node.gain.value = 0.1;
+    setTimeout('document.getElementById("recorder").value="2";', 1000);
+    //gain_node.gain.value = 0;
+    setTimeout('document.getElementById("recorder").value="1";', 2000);
+    //gain_node.gain.value = 0.1;
+    setTimeout('document.getElementById("recorder").value="Stop Recording";', 3000);
+    //gain_node.gain.value = 0;
+    setTimeout(function(){ gain_node.gain.value = 0; }, 500);
+    setTimeout(function(){ gain_node.gain.value = 0.1; }, 1000);
+    setTimeout(function(){ gain_node.gain.value = 0; }, 1500);
+    setTimeout(function(){ gain_node.gain.value = 0.1; }, 2000);
+    setTimeout(function(){ gain_node.gain.value = 0; }, 2500);
+
+
+   recording = true;
+   console.log("i got here");
+   
 
    playback();
 }
@@ -135,6 +152,7 @@ function use_stream(stream)
   // http://lists.w3.org/Archives/Public/public-audio/2013JanMar/0304.html
   window.capture_audio = function(event)
   {
+    console.log("jkghfdshrdjhtfgmj");
 
 
     if (!recording)
@@ -242,6 +260,7 @@ function interpret_correlation_result(event)
   }
 
   if(recording) {
+    console.log(noteDisplay);
     tempArray.push(noteDisplay);
     console.log("ahh");
     filled = false;
@@ -260,6 +279,6 @@ function interpret_correlation_result(event)
     tempArray = [];
 
   }
-  //console.log(finalArray);
+  console.log(noteDisplay);
   //document.getElementById("noteDisplay").textContent = noteDisplay;
 }
