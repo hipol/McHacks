@@ -56,9 +56,14 @@
 <script src = "alex.js"></script>
 <script src = "aishi.js"></script>
 
+
+<script  type="text/javascript">console.log("lalalallalalalalala");</script>
+
 </head>
 
-<body>
+
+
+<!--
 <p>It sounds like you're playing...</p>
 <h1 id="noteDisplay"></h1>
 <p>
@@ -68,9 +73,14 @@
 <hr>
 <button id="play-note">start/stop an E note</button>
 <form action="">
-<!--<input type="button" id="recorder" value="record" style="color:blue"
-       onclick="toggle(this);"> -->
+<input type="button" id="recorder" value="record" style="color:blue"
+       onclick="toggle(this);">
 </form>
+-->
+
+<body>
+
+
 
 
 
@@ -79,58 +89,12 @@
         <div class="col-lg-12">
                 <h1 class="page-header">Vocal Garage Band</h1>
         </div>
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <input type="button" id="playback" value="Playback :)" style="color:blue"
+        <div class="text-center" id="controls">
+                <input class="col-md-2" type="button" id="playback" value="Playback :)" style="color:blue"
        							onclick="playback();">
-            </div>
+                <input class="col-md-2" type="button" id="recorder" value="record" style="color:blue"
+                    onclick="toggle(this);">
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <input type="button" id="recorder" value="record" style="color:blue"
-       							onclick="toggle(this);">
-            </div>
-            <div class="col-md-6">
-                <a class="thumbnail" href="#">
-                    Name of File
-                </a>
-            </div>
-            <div class="col-md-4">
-                    <select id="instrument">
-                      <option value="accordion">Accordion</option>
-                      <option value="flute" selected="selected">Flute</option>
-                      <option value="cello">Cello</option>
-                      <option value="clarinet">Clarinet</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <input type="button" id="recorder" value="record" style="color:blue"
-       							onclick="toggle(this);">
-            </div>
-            <div class="col-md-6">
-                <a class="thumbnail" href="#">
-                    Name of File
-                </a>
-            </div>
-            <div class="col-md-4">
-                    <select id="instrument">
-                      <option value="accordion">Accordion</option>
-                      <option value="flute" selected="selected">Flute</option>
-                      <option value="cello">Cello</option>
-                      <option value="clarinet">Clarinet</option>
-                    </select>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
 
 
     </div>
@@ -143,6 +107,41 @@
     <script src="js/bootstrap.min.js"></script>
 
 
+<!--
+<SCRIPT type="text/javascript">
+jQuery(function(){
+    var counter = 1;
+    jQuery('a.add-author').click(function(event){
+        event.preventDefault();
+
+        var newRow = jQuery('<tr><td><input type="text" name="first_name' +
+            counter + '"/></td><td><input type="text" name="last_name' +
+            counter + '"/></td></tr>');
+            counter++;
+        jQuery('table.authors-list').append(newRow);
+
+    });
+});
+</SCRIPT>
+-->
+
+<SCRIPT type="text/javascript">
+
+var dom_counter = 0
+
+function addDom(){
+      dom_counter = dom_counter + 1;
+
+      var domElement = $('<div class="row text-center" id="row' + dom_counter + '"><div class="col-md-1"><input type="button" id="deleter' + dom_counter + '" value="delete" style="color:blue" onclick="deleteMIDI(' + dom_counter + ');"></div><div class="col-md-3">Track_number_' + dom_counter + '</div><div class="col-md-1"><select id="instrument' + dom_counter + '"><option value="accordion">Accordion</option><option value="flute" selected="selected">Flute</option><option value="cello">Cello</option><option value="clarinet">Clarinet</option></select></div></div>');
+      $("div[id='controls").after(domElement);
+}
+
+
+/*
+deleteMidi(' + dom_counter + ');");"
+*/
+
+</SCRIPT>
 
 
 </body>

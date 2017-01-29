@@ -7,8 +7,10 @@
 //Note: 2 --> clock: 200, MIDI channel: 0, note: E5, velocity: 127, duration: 50 clocks
 //End time = 300 clocks
 
+
+
+
 var MIDI_s = [];
-var pusher = [];
 var createMIDI_counter = -1;
 
 function createMIDI(notesArray, end) {
@@ -19,6 +21,16 @@ function createMIDI(notesArray, end) {
   console.log("this is midi_s");
   console.log(MIDI_s);
 
+}
+
+function deleteMIDI(index) {
+  MIDI_s.splice(index, 1);
+
+  if (MIDI_s.length == 0){
+    MIDI_s = [];
+  }
+
+  document.getElementById("row" + index).style.display = "none";
 }
 
 
@@ -35,24 +47,28 @@ function playback() {
         var velocity = 100;
         var delay = 0;
 
+
         // play the note
+        //var instrumentName = document.getElementById("instrument").value
+
         MIDI.programChange(0, MIDI.GM.byName["acoustic_grand_piano"].number); // set channel 0 to piano
         MIDI.programChange(1, MIDI.GM.byName["acoustic_guitar_nylon"].number); // set channel 1 to guitar
         MIDI.setVolume(0, 127);
         MIDI.setVolume(1, 127);
 
         var MIDI_sLength = MIDI_s.length;
+        console.log(MIDI_s);
         for (var b = 0; b < MIDI_sLength; b++) {
-          var notesArrayLength = MIDI_s[b].length;
-          for (var i = 0; i < notesArrayLength; i++) {
-            console.log(MIDI_s[b][i][0]);
-            console.log("this is the notes array");
-            console.log("im insides")
-            console.log(MIDI_s[b][i][2]);
-            console.log(MIDI_s[b][i][0]);
-            MIDI.noteOn(0, MIDI_s[b][i][2], velocity, MIDI_s[b][i][0]);
-            MIDI.noteOff(0, MIDI_s[b][i][2], MIDI_s[b][i][0] + MIDI_s[b][i][4]);
-            //Do something
+          console.log("im insides");
+          console.log("I am: index " + b)
+          //console.log(MIDI_s[b]);
+          if (typeof MIDI_s[b] !== 'undefined') {
+            var notesArrayLength = MIDI_s[b].length;
+            for (var i = 0; i < notesArrayLength; i++) {
+              MIDI.noteOn(0, MIDI_s[b][i][2], velocity, MIDI_s[b][i][0]);
+              MIDI.noteOff(0, MIDI_s[b][i][2], MIDI_s[b][i][0] + MIDI_s[b][i][4]);
+              //Do something
+            }
           }
         }
 

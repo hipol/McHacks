@@ -52,6 +52,9 @@ function toggle(button)
   else if(document.getElementById("recorder").value=="stop recording"){
    document.getElementById("recorder").value="record";
    recording = false;
+
+   addDom();
+
 }
 }
 
@@ -130,7 +133,7 @@ function interpret_correlation_result(event)
     summation = dominant_frequency.frequency;
     counter ++;
     //console.log(dominant_frequency.frequency);
-    document.getElementById("noteDisplay").textContent = dominant_frequency.name;
+    //document.getElementById("noteDisplay").textContent = dominant_frequency.name;
     //document.getElementById("frequency").textContent = dominant_frequency.frequency;
 
 
@@ -147,7 +150,7 @@ function interpret_correlation_result(event)
       //console.log(average + "    " + counter);
     }
 
-  document.getElementById("average").textContent = averageMert;
+  //document.getElementById("average").textContent = averageMert;
   //console.log(averageMert);
   //var noteArray = ["C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4"];
   var noteArray = [48,49,50,51,52,53,54,55,56,57,58,59];
