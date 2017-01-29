@@ -5,12 +5,42 @@
  */
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-    background-color: #96E5FF;
-
+    background: rgba(76,76,76,1);
+  background: -moz-linear-gradient(45deg, rgba(76,76,76,1) 0%, rgba(66,60,66,1) 21%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+  background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(76,76,76,1)), color-stop(21%, rgba(66,60,66,1)), color-stop(76%, rgba(43,43,43,1)), color-stop(91%, rgba(28,28,28,1)), color-stop(100%, rgba(19,19,19,1)));
+  background: -webkit-linear-gradient(45deg, rgba(76,76,76,1) 0%, rgba(66,60,66,1) 21%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+  background: -o-linear-gradient(45deg, rgba(76,76,76,1) 0%, rgba(66,60,66,1) 21%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+  background: -ms-linear-gradient(45deg, rgba(76,76,76,1) 0%, rgba(66,60,66,1) 21%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+  background: linear-gradient(45deg, rgba(76,76,76,1) 0%, rgba(66,60,66,1) 21%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=1 );
+    color: white;
     min-height: 100vh;
 }
 
-.row{
-  padding:20px;
+.files{
+  margin-top:60px;
+  margin-bottom:60px;
+  padding: 20px;
+  background-color: grey;
 }
+
+input{
+  color: black !important;
+  background-color: red !important;
+  border-color: grey !important;
+}
+
+#controls input{
+  color: black !important;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: orange !important;
+
+}
+
+
+
+select{
+  color: black;
+}
+

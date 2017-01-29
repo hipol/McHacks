@@ -43,14 +43,14 @@ correlation_worker.addEventListener("message", interpret_correlation_result);
 
 function toggle(button)
 {
-  if(document.getElementById("recorder").value=="record"){
-   document.getElementById("recorder").value="stop recording";
+  if(document.getElementById("recorder").value=="Record"){
+   document.getElementById("recorder").value="Stop Recording";
    recording = true;
    playback();
 }
 
-  else if(document.getElementById("recorder").value=="stop recording"){
-   document.getElementById("recorder").value="record";
+  else if(document.getElementById("recorder").value=="Stop Recording"){
+   document.getElementById("recorder").value="Record";
    recording = false;
 
    addDom();

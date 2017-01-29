@@ -35,10 +35,27 @@ function deleteMIDI(index) {
 
 
 function playback() {
+
+  var instrumentName = [];
+  var MIDI_sLength = MIDI_s.length;
+
+  for (var b = 0; b < MIDI_sLength; b++) {
+    console.log(b)
+    console.log(document.getElementById("instrument" + b))
+    if (document.getElementById("instrument" + b) !== null){
+      if (document.getElementById("instrument" + b).value !== null ) {
+      instrumentName[b] = document.getElementById("instrument" + b).value;
+      }
+    } else{
+      instrumentName[b] = "acoustic_grand_piano"
+    }
+  }
+
+
   MIDI.loadPlugin({
       soundfontUrl: "examples/soundfont/",
       instrument: "acoustic_grand_piano", // or the instrument code 1 (aka the default)
-      instruments: [ "acoustic_guitar_nylon" , "acoustic_grand_piano" ], // or multiple instruments
+      instruments: instrumentName, // or multiple instruments
       onprogress: function(state, progress) {
         console.log(state, progress);
       },
@@ -50,23 +67,18 @@ function playback() {
 
         // play the note
         //var instrumentName = document.getElementById("instrument").value
-
-        MIDI.programChange(0, MIDI.GM.byName["acoustic_grand_piano"].number); // set channel 0 to piano
-        MIDI.programChange(1, MIDI.GM.byName["acoustic_guitar_nylon"].number); // set channel 1 to guitar
-        MIDI.setVolume(0, 127);
-        MIDI.setVolume(1, 127);
-
-        var MIDI_sLength = MIDI_s.length;
-        console.log(MIDI_s);
         for (var b = 0; b < MIDI_sLength; b++) {
+          MIDI.programChange(b, MIDI.GM.byName[instrumentName[b]].number); // set channel 0 to piano
+          MIDI.setVolume(b, 127);
+
           console.log("im insides");
           console.log("I am: index " + b)
           //console.log(MIDI_s[b]);
           if (typeof MIDI_s[b] !== 'undefined') {
             var notesArrayLength = MIDI_s[b].length;
             for (var i = 0; i < notesArrayLength; i++) {
-              MIDI.noteOn(0, MIDI_s[b][i][2], velocity, MIDI_s[b][i][0]);
-              MIDI.noteOff(0, MIDI_s[b][i][2], MIDI_s[b][i][0] + MIDI_s[b][i][4]);
+              MIDI.noteOn(b, MIDI_s[b][i][2], velocity, MIDI_s[b][i][0]);
+              MIDI.noteOff(b, MIDI_s[b][i][2], MIDI_s[b][i][0] + MIDI_s[b][i][4]);
               //Do something
             }
           }
@@ -78,6 +90,43 @@ function playback() {
         MIDI.noteOn(1, note, velocity, delay+0.5);
         MIDI.noteOff(1, note, delay+0.5 + 0.75);
         */
+      }
+    });
+}
+
+
+
+function individualPlayback(b) {
+
+  var instrumentName = document.getElementById("instrument" + b).value
+  console.log(instrumentName);
+
+  MIDI.loadPlugin({
+      soundfontUrl: "examples/soundfont/",
+      instrument: instrumentName, // or the instrument code 1 (aka the default)
+      onprogress: function(state, progress) {
+        console.log(state, progress);
+      },
+      onsuccess: function() {
+        var note = 51;
+        var velocity = 100;
+        var delay = 0;
+
+        // play the note
+
+        MIDI.programChange(0, MIDI.GM.byName[instrumentName].number); // set channel 0 to piano
+        MIDI.setVolume(0, 127);
+
+        if (typeof MIDI_s[b] !== 'undefined') {
+          var notesArrayLength = MIDI_s[b].length;
+          for (var i = 0; i < notesArrayLength; i++) {
+            MIDI.noteOn(0, MIDI_s[b][i][2], velocity, MIDI_s[b][i][0]);
+            MIDI.noteOff(0, MIDI_s[b][i][2], MIDI_s[b][i][0] + MIDI_s[b][i][4]);
+            //Do something
+          }
+        }
+
+
       }
     });
 }
