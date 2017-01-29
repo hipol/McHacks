@@ -110,11 +110,8 @@ var playing = false;
     setTimeout(function(){ gain_node.gain.value = 0; }, 1500);
     setTimeout(function(){ gain_node.gain.value = 0.1; }, 2000);
     setTimeout(function(){ gain_node.gain.value = 0; }, 2500);
-    
-    //gain_node.gain.value = 0;
-    setTimeout('gain_node.gain.value = 0.1";', 2000);
-    //gain_node.gain.value = 0.1;
-    setTimeout('gain_node.gain.value = 0', 3000);
+
+
    recording = true;
    console.log("i got here");
    
@@ -155,6 +152,7 @@ function use_stream(stream)
   // http://lists.w3.org/Archives/Public/public-audio/2013JanMar/0304.html
   window.capture_audio = function(event)
   {
+    console.log("jkghfdshrdjhtfgmj");
 
 
     if (!recording)
@@ -262,6 +260,7 @@ function interpret_correlation_result(event)
   }
 
   if(recording) {
+    console.log(noteDisplay);
     tempArray.push(noteDisplay);
     console.log("ahh");
     filled = false;
@@ -280,6 +279,6 @@ function interpret_correlation_result(event)
     tempArray = [];
 
   }
-  //console.log(finalArray);
+  console.log(noteDisplay);
   //document.getElementById("noteDisplay").textContent = noteDisplay;
 }
