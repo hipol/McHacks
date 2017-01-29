@@ -14,12 +14,14 @@ var recording = false;
 var totalDuration = 0;
 
 //set up an analyzer
+/*
 var analyzer = context.createAnalyzer();
 analyzer.smoothingTimeConstant = 0.3;
 analyzer.fftSize = 1024;
+*/
 
 //set up javascript node
-var javascriptNode = context.createScriptProcessor(2048, 1, 1);
+/*var javascriptNode = context.createScriptProcessor(2048, 1, 1);
 
 
 javascriptNode.onaudioproccess = function() {
@@ -32,7 +34,7 @@ javascriptNode.onaudioproccess = function() {
   ctx.fillStyle=gradient;
   ctx.fillRext(0,130-average,25,130);
 }
-
+*/
 function getAverageVolume(array)  {
   var values = 0;
   var average;
