@@ -12,6 +12,8 @@ var filteredArray = [];
 var filled = false;
 var recording = false;
 var totalDuration = 0;
+var rms;
+var noteDisplay;
 
 //set up an analyzer
 /*
@@ -161,6 +163,27 @@ function use_stream(stream)
       return;
 
     buffer = buffer.concat(Array.prototype.slice.call(event.inputBuffer.getChannelData(0)));
+    var buf = event.inputBuffer.getChannelData(0);
+    var bufLength = buf.length;
+    var sum = 0;
+    var x;
+    for (var i=0; i<bufLength; i++) {
+      x = buf[i];
+      if (Math.abs(x)>=this.clipLevel) {
+        this.clipping = true;
+        this.lastClip = window.performance.now();
+      }
+      sum += x * x;
+    }
+
+    // ... then take the square root of the sum.
+    rms =  Math.sqrt(sum / bufLength);
+
+    // Now smooth this out with the averaging factor applied
+    // to the previous sample - take the max here because we
+    // want "fast attack, slow release."
+    var volume = Math.max(rms, this.volume*this.averaging);
+    //console.log(rms);
     // Stop recording after sample_length_milliseconds.
     if (buffer.length > sample_length_milliseconds * audio_context.sampleRate / 1000)
     {
@@ -240,10 +263,14 @@ function interpret_correlation_result(event)
   //console.log(frequencyArray);
   //console.log(noteArray);
 
-  var noteDisplay;
+  
   for(var i = 0; i<30; i++) {
+    if(rms>.15)  {
     if(averageMert <= frequencyArray[0])  {
-      noteDisplay = noteArray[0];
+      if(rms > .15)  {
+        noteDisplay = noteArray[0];
+        console.log(noteArray[0]);
+    }
       break;
     }
     if(averageMert >= frequencyArray[29]) {
@@ -256,14 +283,20 @@ function interpret_correlation_result(event)
         noteDisplay = noteArray[(i+1)%12];
       else
         noteDisplay = noteArray[i%12];
+
+      console.log(noteDisplay);
       break;
     }
+  }
+  
 
   }
+  console.log(noteDisplay);
 
   if(recording) {
     console.log(noteDisplay);
-    tempArray.push(noteDisplay);
+    if(rms>.15)
+      tempArray.push(noteDisplay);
     console.log("ahh");
     filled = false;
   }
@@ -281,6 +314,6 @@ function interpret_correlation_result(event)
     tempArray = [];
 
   }
-  console.log(noteDisplay);
+  //console.log(noteDisplay);
   //document.getElementById("noteDisplay").textContent = noteDisplay;
 }
