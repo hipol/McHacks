@@ -13,6 +13,40 @@ var filled = false;
 var recording = false;
 var totalDuration = 0;
 
+//set up an analyzer
+var analyzer = context.createAnalyzer();
+analyzer.smoothingTimeConstant = 0.3;
+analyzer.fftSize = 1024;
+
+//set up javascript node
+var javascriptNode = context.createScriptProcessor(2048, 1, 1);
+
+
+javascriptNode.onaudioproccess = function() {
+  // get the average, bitcount is fftsize/2
+  var array = new Unit8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(array);
+  var average = getAverageVolume(array)
+
+  ctx.clearRext(0, 0, 60, 130);
+  ctx.fillStyle=gradient;
+  ctx.fillRext(0,130-average,25,130);
+}
+
+function getAverageVolume(array)  {
+  var values = 0;
+  var average;
+  var length = array.length;
+
+  //get all the freq amplitudes
+  for(var i = 0; i<length; i++) {
+    values += array[i];
+  }
+
+  average = values / length;
+  return average;
+}
+
 function filterArray(unfilteredArray) {
   var filteredArray = [];
   for(var i = 0; i < unfilteredArray.length; i++) {
@@ -46,6 +80,21 @@ function toggle(button)
   if(document.getElementById("recorder").value=="Record"){
    document.getElementById("recorder").value="Stop Recording";
    recording = true;
+   console.log("i got here");
+   var note_context = new AudioContext();
+var note_node = note_context.createOscillator();
+var gain_node = note_context.createGain();
+note_node.frequency = C2 * Math.pow(2, 4 / 12); // E, ~82.41 Hz.
+gain_node.gain.value = 0;
+note_node.connect(gain_node);
+gain_node.connect(note_context.destination);
+note_node.start();
+var playing = false;
+
+  playing = !playing;
+    console.log('asldkf');
+    gain_node.gain.value = 0.1;
+
    playback();
 }
 
@@ -85,6 +134,7 @@ function use_stream(stream)
 
     if (!recording)
       return;
+
     buffer = buffer.concat(Array.prototype.slice.call(event.inputBuffer.getChannelData(0)));
     // Stop recording after sample_length_milliseconds.
     if (buffer.length > sample_length_milliseconds * audio_context.sampleRate / 1000)
