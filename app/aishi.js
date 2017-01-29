@@ -46,8 +46,11 @@ function deleteMIDI(index) {
   document.getElementById("row" + index).style.display = "none";
 }
 
+console.log("gagagagagaggaga");
+
 
 function playback() {
+  console.log("starting playback");
 
   var instrumentName = [];
   var MIDI_sLength = MIDI_s.length;
@@ -64,6 +67,7 @@ function playback() {
     } else{
       instrumentName[b] = "acoustic_grand_piano"
     }
+
   }
 
 
@@ -108,6 +112,8 @@ function playback() {
         */
       }
     });
+
+console.log("done!");
 }
 
 
