@@ -16,9 +16,9 @@ var totalDuration = 0;
 function filterArray(unfilteredArray) {
   var filteredArray = [];
   for(var i = 0; i < unfilteredArray.length; i++) {
-    var duration = 5;
+    var duration = 3;
     while(unfilteredArray[i] == unfilteredArray[i+1]) {
-      duration += 5;
+      duration += 3;
       i++;
     }
     filteredArray.push([totalDuration, 0, unfilteredArray[i], 127, duration]);
