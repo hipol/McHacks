@@ -15,10 +15,24 @@ var createMIDI_counter = -1;
 function createMIDI(notesArray, end) {
   createMIDI_counter = createMIDI_counter + 1;
 
+  if (createMIDI_counter !== 0){
   //MIDI_s.push(notesArray);
   MIDI_s[createMIDI_counter ] = notesArray;
   console.log("this is midi_s");
   console.log(MIDI_s);
+  }
+
+}
+
+makeBeat(0.6, 10);
+function makeBeat(duration, number){
+  console.log("percusssisi")
+
+  beatArray = [];
+    for (var i = 0; i < number; i++) {
+      beatArray[i] = [0+0.6*i, 0, 50, 127, 0.6];
+    }
+  MIDI_s[0] = beatArray;
 
 }
 
@@ -41,7 +55,9 @@ function playback() {
   for (var b = 0; b < MIDI_sLength; b++) {
     console.log(b)
     console.log(document.getElementById("instrument" + b))
-    if (document.getElementById("instrument" + b) !== null){
+    if (b == 0){
+      instrumentName[b] = "marimba"
+    }else if (document.getElementById("instrument" + b) !== null){
       if (document.getElementById("instrument" + b).value !== null ) {
       instrumentName[b] = document.getElementById("instrument" + b).value;
       }
@@ -70,8 +86,9 @@ function playback() {
           MIDI.programChange(b, MIDI.GM.byName[instrumentName[b]].number); // set channel 0 to piano
           MIDI.setVolume(b, 127);
 
-          console.log("im insides");
+          console.log("---------im insides");
           console.log("I am: index " + b)
+          console.log(instrumentName[b])
           //console.log(MIDI_s[b]);
           if (typeof MIDI_s[b] !== 'undefined') {
             var notesArrayLength = MIDI_s[b].length;

@@ -49,8 +49,8 @@ function toggle(button)
     setTimeout('document.getElementById("recorder").value="2";', 1000);
     setTimeout('document.getElementById("recorder").value="1";', 2000);
     setTimeout('document.getElementById("recorder").value="Stop Recording";', 3000);
-   recording = true;
-   playback();
+    setTimeout('recording = true;', 3000);
+    setTimeout('playback();', 3000);
 }
 
   else if(document.getElementById("recorder").value=="Stop Recording"){
